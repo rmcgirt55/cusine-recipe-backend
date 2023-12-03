@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import (
     api_view,
     authentication_classes,
@@ -42,17 +43,21 @@ def signin(request):
 @api_view(["POST"])
 @permission_classes([AllowAny])
 def signup(request):
-    username = request.data.get("username")
-    password = request.data.get("password")
-    email = request.data.get("email")
+    try:
+        username = request.data.get("username")
+        password = request.data.get("password")
+        email = request.data.get("email")
 
-    user = User.objects.create_user(username, email, password)
-    user.save()
+        user = User.objects.create_user(username, email, password)
+        user.save()
 
-    return Response(status=status.HTTP_200_OK)
+        return Response({'success': True}, status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({'success': False, 'message': 'User already exists'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(["POST"])
+@csrf_exempt
 def signout(request):
     logout(request)
     return Response(status=status.HTTP_200_OK)
@@ -87,6 +92,18 @@ def get_user_details(request):
 @permission_classes([AllowAny])
 def create_recipe(request):
     serializer = RecipeSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response(serializer.errors)
+
+
+@api_view(["PUT"])
+@authentication_classes([TokenAuthentication])
+@permission_classes([AllowAny])
+def edit_recipe(request):
+    data = Recipe.objects.get(id=request.data['id'])
+    serializer = RecipeSerializer(data, data=request.data, partial=True)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
