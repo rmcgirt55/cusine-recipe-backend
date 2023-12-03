@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import ssl
 from pathlib import Path
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -98,6 +98,20 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME":  "db.sqlite3",
+    },
+    "mongodb": {
+        'ENGINE': 'djongo',
+        'NAME': "cluster0",
+        'ENFORCE_SCHEMA': True,
+        'CLIENT': {
+            'host': "mongodb+srv://admin:Invert12345@cluster0.wcmwyen.mongodb.net/?retryWrites=true&w=majority",
+            'port': 27017,
+            'username': "admin",
+            'password': "Invert12345",
+            'authSource': 'admin',
+            'authMechanism': 'SCRAM-SHA-1',
+            'ssl': True,
+        }
     }
 }
 
