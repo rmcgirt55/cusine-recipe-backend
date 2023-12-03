@@ -108,3 +108,11 @@ def edit_recipe(request):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
     return Response(serializer.errors)
+
+
+@api_view(["DELETE"])
+@authentication_classes([TokenAuthentication])
+@permission_classes([AllowAny])
+def delete_recipe(request):
+    Recipe.objects.filter(id=request.data['id']).delete()
+    return Response(status=status.HTTP_200_OK)

@@ -13,5 +13,6 @@ urlpatterns = [
     path("auth/", views.get_user_details, name="get_user_details"),
     path("create_recipe/", views.create_recipe, name="create_recipe"),
     path("edit_recipe/", views.edit_recipe, name="create_recipe"),
+    path("delete_recipe/", views.delete_recipe, name="create_recipe"),
     # Add other paths as needed
 ]
