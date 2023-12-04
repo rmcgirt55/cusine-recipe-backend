@@ -70,6 +70,26 @@ Users can view all the recipes available on the platform.
 - **Deployment:**
   - Heroku
 
+## Bug Fixes
+
+### Styling Issue
+
+- **Problem:** Text and color styling were not consistent.
+- **Resolution:** The styling issues have been addressed to ensure a visually appealing user interface.
+
+### Image Upload
+
+- **Problem:** The application initially accepted image URLs, which could cause issues if the hosting website was down.
+- **Resolution:** Image upload functionality has been implemented, ensuring images are hosted on the application's server for stability.
+
+## Unfinished Functionality
+
+### Recipe Search
+
+- **Status:** Currently unfinished.
+- **Details:** The ability to search for recipes is a planned feature that is still under development. Stay tuned for updates!
+
+
 ## Application Link
 
 The deployed version of the Recipe App can be accessed [here](https://culinary-front-e03d74ce4209.herokuapp.com/).
