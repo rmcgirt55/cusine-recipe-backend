@@ -92,5 +92,8 @@ Users can view all the recipes available on the platform.
 
 ## Application Link
 
-The deployed version of the Recipe App can be accessed [here](https://culinary-front-e03d74ce4209.herokuapp.com/).
+### Accessing the Deployed Recipe App
+
+The deployed version of the Recipe App can be accessed [here](https://frontend-cusiner-app-f11a7786b2e3.herokuapp.com/about).
+
 
